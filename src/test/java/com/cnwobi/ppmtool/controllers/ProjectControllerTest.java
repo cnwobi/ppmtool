@@ -13,5 +13,7 @@ public class ProjectControllerTest {
 
     @Test
     public void createNewProject() {
+
+        assertEquals(1,1);
     }
 }

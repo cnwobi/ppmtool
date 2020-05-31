@@ -1,40 +1,49 @@
 package com.cnwobi.ppmtool.model;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-
-
 import javax.persistence.*;
-import java.util.Date;
+import lombok.NoArgsConstructor;
+
 
 @Entity
 @Data
-
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
+    @NotNull
     private  String projectName;
-
-    public Project() {
-    }
-
-    private String projectIdentifier;
+    @NotNull
+    @Column(unique = true)
+   private String projectIdentifier;
+    @NotNull
     private String description;
-    private Date start_date;
-    private Date end_date;
-    private Date created_At;
-    private Date updated_At;
+    private LocalDateTime startDate;
+    private LocalDateTime endDate;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
 
 
 
     @PrePersist
     protected void onCreated(){
-        this.created_At= new Date();
+
+
+        this.createdAt = LocalDateTime.now();
 
     }
     @PreUpdate
     protected void onUpdate(){
-        this.updated_At = new Date();
+        this.updatedAt = LocalDateTime.now();
     }
 
 }

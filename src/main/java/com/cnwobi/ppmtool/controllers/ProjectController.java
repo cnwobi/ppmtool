@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/project")
 public class ProjectController {
 
- private ProjectService projectService;
+  private final ProjectService projectService;
 
-    public ProjectController(ProjectService projectService) {
-        this.projectService = projectService;
-    }
+  public ProjectController(ProjectService projectService) {
+    this.projectService = projectService;
+  }
 
     @PostMapping("")
     public ResponseEntity<Project> createNewProject(@RequestBody Project project){
 
-        return new ResponseEntity<>(project, HttpStatus.CREATED);
+        return new ResponseEntity<>(projectService.saveOrUpdateProject(project), HttpStatus.CREATED);
     }
 }
